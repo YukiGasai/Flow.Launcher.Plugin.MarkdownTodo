@@ -1,0 +1,12 @@
+body:
+  - type: inputWithFolderBtn
+    attributes:
+      name: folderPath
+      label: Folder Path
+      description: Path to the folder where markdown files are saved
+  - type: input
+    attributes:
+      name: fileName
+      label: Dynamic File Name
+      description: A pattern to describe the filename to update for the current date.
+      defaultValue: '{{YYYY-MM-dd}}.md'

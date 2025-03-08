@@ -1,0 +1,32 @@
+{
+  "name": "flow.launcher.plugin.markdowntodo",
+  "version": "0.0.1",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint"
+  },
+  "keywords": [
+    "Flow Launcher",
+    "Markdown",
+    "Todo",
+    "Plugin"
+  ],
+  "author": "YukiGasai",
+  "license": "MIT",
+  "description": "Update your markdown todo list with Flow Launcher",
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "eslint": "^9.10.0",
+    "neostandard": "^0.11.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "flow-launcher-helper": "^2.2.0"
+  }
+}

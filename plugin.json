@@ -1,0 +1,12 @@
+{
+  "ID": "dbe2ddb788c046599a627db1c3ab99af",
+  "ActionKeyword": "t",
+  "Name": "MarkdownTodo",
+  "Description": "Update your markdown todo list with Flow Launcher",
+  "Author": "YukiGasai",
+  "Version": "0.0.1",
+  "Language": "javascript",
+  "Website": "https://github.com/YukiGasai/MarkdownTodo",
+  "ExecuteFileName": "dist\\main.js",
+  "IcoPath": "img\\app.png"
+}

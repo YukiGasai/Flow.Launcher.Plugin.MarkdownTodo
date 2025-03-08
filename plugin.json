@@ -6,7 +6,7 @@
   "Author": "YukiGasai",
   "Version": "0.0.1",
   "Language": "javascript",
-  "Website": "https://github.com/YukiGasai/MarkdownTodo",
+  "Website": "https://github.com/YukiGasai/Flow.Launcher.Plugin.MarkdownTodo",
   "ExecuteFileName": "dist\\main.js",
   "IcoPath": "img\\app.png"
 }

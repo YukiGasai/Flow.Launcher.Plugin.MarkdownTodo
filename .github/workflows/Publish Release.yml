@@ -31,11 +31,11 @@ jobs:
           npm run build
           npm prune --omit=dev
       - name: Package
-        run: zip -r markdowntodo.zip . -x '*.git*' -x 'src/*' -x 'README.md' -x 'tsconfig.json'
+        run: zip -r Flow.Launcher.Plugin.MarkdownTodo.zip . -x '*.git*' -x 'src/*' -x 'README.md' -x 'tsconfig.json'
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
-          files: 'markdowntodo.zip'
+          files: 'Flow.Launcher.Plugin.MarkdownTodo.zip'
           tag_name: "v${{steps.version.outputs.prop}}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,5 @@
 {
-  "name": "flow.launcher.plugin.markdowntodo",
+  "name": "markdowntodo",
   "version": "0.0.1",
   "main": "dist/main.js",
   "type": "module",

@@ -42,10 +42,10 @@ Example:
 
 To filter the list of todos you can use the following options in the search bar:
 
-`title:` - Filter by title (default)
-`file:` - Filter by file name
-`folder:` - Filter by folder name
-`state:` - Filter by state
+- `title:` - Filter by title (default)
+- `file:` - Filter by file name
+- `folder:` - Filter by folder name
+- `state:` - Filter by state
 
 Not done state is `o` instead of a space.
 

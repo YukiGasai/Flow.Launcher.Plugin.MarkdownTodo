@@ -1,3 +1,6 @@
+/**
+ * This map will map the icon to the todo state char
+ */
 export const iconMap:Map<string, string> = new Map([
   ['!', 'icons\\alert.png'],
   ['b', 'icons\\bookmark.png'],

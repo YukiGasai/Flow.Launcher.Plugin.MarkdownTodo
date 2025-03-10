@@ -52,6 +52,10 @@ Not done state is `o` instead of a space.
 Example:
 `t file:my-todo.md state:o` - List all todos in the file `my-todo.md` that are not done.
 
+It is possible to add a new todo by typing `t +` and then the title of the todo.
+
+It is possible to delete a todo by typing `t -`.
+
 ## Thanks to
 
 - [EmojiFinder plugin](https://github.com/kalvn/Flow.Launcher.Plugin.EmojiFinder) for providing a good example on how to create a FlowLauncher plugin.

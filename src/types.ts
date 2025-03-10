@@ -1,4 +1,4 @@
-export type Methods = 'open_result' | 'update_todo' | 'get_todos_from_file';
+export type Methods = 'add_todo' | 'delete_todo' | 'update_todo';
 
 export type Result<T, E = Error> = | { data: T; error: null } | { data: null; error: E };
 
@@ -13,10 +13,6 @@ export class Todo {
     this.state = state;
     this.folderPath = folderPath;
     this.fileName = fileName;
-  }
-
-  isDone (): boolean {
-    return this.state !== ' ';
   }
 
   getFilePath (): string {

@@ -1,8 +1,14 @@
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { format } from 'date-fns/format';
-import type { Result } from './types.js';
+import type { Result } from '../types.js';
 
+/**
+ * Get the date in the form of a pattern string
+ * @param today the date to use
+ * @param pattern the pattern string to convert the date to
+ * @returns The upadted date as formatted string
+ */
 function replacePattern (today: Date, pattern: string): string {
   const trueDatePattern = pattern.slice(2, -2);
   return format(today, trueDatePattern, {
@@ -11,6 +17,12 @@ function replacePattern (today: Date, pattern: string): string {
   });
 }
 
+/**
+ * Check for patterns in a string and replace them with the current date
+ * @param input the string to check for patterns
+ * @param dateOffset the offset to add to the date
+ * @returns The string with the patterns replaced
+ */
 function checkForPatterns (input: string, dateOffset = 0): Result<string> {
   let stringWithData;
   const today = new Date();
@@ -33,26 +45,11 @@ function checkForPatterns (input: string, dateOffset = 0): Result<string> {
   return { data: stringWithData, error: null };
 }
 
-export function getFiles (settings: Record<string, string>): Result<string[]> {
-  const folderPathResult = getFilePath(settings);
-  if (folderPathResult.error) {
-    return { data: null, error: folderPathResult.error };
-  }
-
-  const [folderPath, fileName] = folderPathResult.data;
-
-  if (fileName) {
-    return { data: [fileName], error: null };
-  }
-
-  const files = readdirSync(folderPath);
-  const markdownFiles = files
-    .filter(file => file.endsWith('.md'))
-    .sort((b, a) => a.localeCompare(b));
-
-  return { data: markdownFiles, error: null };
-}
-
+/**
+ * Get the folder path and file name from the settings but also check for patterns
+ * @param settings the settings object
+ * @returns The folder path and file name as a tuple
+ */
 export function getFilePath (settings: Record<string, string>): Result<[string, string?]> {
   // Make sure the folder path is set in the settings
   if (!settings.folderPath) {

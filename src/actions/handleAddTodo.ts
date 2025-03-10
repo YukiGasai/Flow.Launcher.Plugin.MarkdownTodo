@@ -1,9 +1,8 @@
-import type { Flow } from 'flow-launcher-helper';
 import { insertTodo } from '../util/todoHelper.js';
-import { Todo, type Methods } from '../types.js';
+import { Todo } from '../types.js';
+import { showResult } from '../util/showResult.js';
 
-export function handleAddTodo (flow: Flow<Methods>, params: string[]): void {
-  const { showResult } = flow;
+export function handleAddTodo (params: string[]): void {
   const { todo } = JSON.parse(params.join(''));
 
   const newTodo = new Todo(todo.title, todo.state, todo.folderPath, todo.fileName);

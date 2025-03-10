@@ -1,29 +1,29 @@
-import type { Flow, JSONRPCResponse } from 'flow-launcher-helper';
 import { getFilePath } from '../util/getFilePath.js';
-import { Todo, type Methods } from '../types.js';
+import { Todo, type JSONRPCResponse } from '../types.js';
 import { getTodos } from '../util/todoHelper.js';
 import { iconMap } from '../util/iconMap.js';
+import { showResult } from '../util/showResult.js';
 
 /**
  * Handle the query method for the plugin
  * @param flow The flow object
  * @param params The query parameters in this case the text from the search bar
  */
-export async function handleQuery (flow: Flow<Methods>, params: string[]) {
+export async function handleQuery (settings: Record<string, string>, params: string[]): Promise<void> {
   const query = params.join('').trim();
 
   // Add a new todo mode
   if (query.startsWith('+')) {
-    return handleAddTodo(flow, query.slice(1));
+    return handleAddTodo(settings, query.slice(1));
   }
 
   // Delete a todo mode
   if (query.startsWith('-')) {
-    return await handleUpdateTodo(flow, query.slice(1), true);
+    return await handleUpdateTodo(settings, query.slice(1), true);
   }
 
   // Update a todo mode
-  return await handleUpdateTodo(flow, query);
+  return await handleUpdateTodo(settings, query);
 }
 
 /**
@@ -31,8 +31,7 @@ export async function handleQuery (flow: Flow<Methods>, params: string[]) {
  * @param flow The flow object
  * @param query The query string in this case the name of the new todo
  */
-function handleAddTodo (flow: Flow<Methods>, query: string): void {
-  const { showResult, settings } = flow;
+function handleAddTodo (settings: Record<string, string>, query: string): void {
   // Check that there is a file name so we know where to insert the todo
   if (settings['fileName'] === undefined) {
     return showResult({
@@ -75,9 +74,7 @@ function handleAddTodo (flow: Flow<Methods>, query: string): void {
  * @param query The query string in this case the search query
  * @param isDelete  Whether the update is a delete operation
  */
-async function handleUpdateTodo (flow: Flow<Methods>, query: string, isDelete = false) {
-  const { showResult, settings } = flow;
-
+async function handleUpdateTodo (settings: Record<string, string>, query: string, isDelete = false) {
   // Try to get all the todos
   const todoResult = await getTodos(settings);
   if (todoResult.error) {
@@ -91,7 +88,7 @@ async function handleUpdateTodo (flow: Flow<Methods>, query: string, isDelete = 
   // Filter the todos and convert them to list items
   const todos = todoResult.data;
   const filteredTodos = filterTodos(todos, query);
-  const result: JSONRPCResponse<Methods>[] = filteredTodos.map(todo => ({
+  const result: JSONRPCResponse[] = filteredTodos.map(todo => ({
     title: todo.title,
     subtitle: todo.fileName,
     iconPath: isDelete ? 'icons\\trash.png' : iconMap.get(todo.state) || 'icons\\info.png',

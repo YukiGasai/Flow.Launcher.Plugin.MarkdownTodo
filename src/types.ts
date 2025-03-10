@@ -1,5 +1,3 @@
-export type Methods = 'add_todo' | 'delete_todo' | 'update_todo';
-
 export type Result<T, E = Error> = | { data: T; error: null } | { data: null; error: E };
 
 export class Todo {
@@ -18,4 +16,26 @@ export class Todo {
   getFilePath (): string {
     return `${this.folderPath}/${this.fileName}`;
   }
+}
+
+export interface JSONRPCResponse {
+  title: string;
+  subtitle?: string;
+  method?: string;
+  params?: string[];
+  dontHideAfterAction?: boolean;
+  iconPath?: string;
+  score?: number;
+}
+
+export interface FlowResult {
+  Title: string;
+  Subtitle?: string;
+  JsonRPCAction: {
+    method?: string;
+    parameters: string[];
+    dontHideAfterAction: boolean;
+  };
+  IcoPath?: string;
+  score: number;
 }

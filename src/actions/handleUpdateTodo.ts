@@ -1,9 +1,8 @@
-import type { Flow } from 'flow-launcher-helper';
 import { updateTodo } from '../util/todoHelper.js';
-import { Todo, type Methods } from '../types.js';
+import { Todo } from '../types.js';
+import { showResult } from '../util/showResult.js';
 
-export function handleUpdateTodo (flow: Flow<Methods>, params: string[]): void {
-  const { showResult } = flow;
+export function handleUpdateTodo (params: string[]): void {
   const { query, item } = JSON.parse(params.join(''));
 
   const todo = new Todo(item.title, item.state, item.folderPath, item.fileName);

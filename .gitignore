@@ -1,4 +1,5 @@
 node_modules
 dist
 src/debug.js
+settings.json
 *.zip

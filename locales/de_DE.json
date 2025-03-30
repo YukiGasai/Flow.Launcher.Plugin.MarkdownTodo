@@ -1,0 +1,17 @@
+{
+    "Error inserting todo": "Fehler beim Einfügen des Todo",
+    "Error deleting todo": "Fehler beim Löschen des Todo",
+    "Today": "Heute",
+    "Subtract": "Minus",
+    "Add": "Plus",
+    "day(s) to": "Tag(e) zu",
+    "Error": "Fehler",
+    "Add Todos only works when setting a file name in the settings": "Todo hinzufügen funktioniert nur, wenn ein Dateiname in den Einstellungen festgelegt ist",
+    "Add New Todo": "Neues Todo hinzufügen",
+    "Error loading Todos": "Fehler beim Laden der Todos",
+    "Error updating todo": "Fehler beim Aktualisieren des Todos",
+    "Error reading settings file": "Fehler beim Lesen der Einstellungen",
+    "Invalid Pattern": "Ungültiges Muster",
+    "Missing setting Folder Path": "Fehlender Ordnerpfad in den Einstellungen",
+    "File doesn't exist": "Datei existiert nicht"
+}

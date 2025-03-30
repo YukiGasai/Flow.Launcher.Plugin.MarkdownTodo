@@ -1,23 +1,21 @@
 import { insertTodo } from '../util/todoHelper.js';
-import { Todo } from '../types.js';
-import { showResult } from '../util/showResult.js';
+import { Icon, Todo } from '../types.js';
+import { refreshResults, showResult } from '../util/showResult.js';
+import { I18n } from '../util/i18n.js';
 
 export function handleAddTodo (params: string[]): void {
   const { todo } = JSON.parse(params.join(''));
 
   const newTodo = new Todo(todo.title, todo.state, todo.folderPath, todo.fileName);
-
+  const i18n = I18n.getInstance();
   const insertResult = insertTodo(newTodo);
   if (insertResult.error) {
     return showResult({
-      title: 'Error inserting todo',
+      title: i18n.t('Error inserting todo'),
       subtitle: insertResult.error.message,
-      iconPath: 'icons\\alert.png',
+      iconPath: Icon.ALERT,
     });
   }
 
-  console.log(JSON.stringify({
-    method: 'Flow.Launcher.ChangeQuery',
-    parameters: [`t ${newTodo.title}`, true]
-  }));
+  refreshResults(newTodo.title);
 }

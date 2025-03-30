@@ -34,11 +34,13 @@ export async function getTodos (settings: Record<string, string>): Promise<Resul
  * Update a todo with its next logical state
  * @param todo The todo to update (not yet updated)
  */
-export function updateTodo (todo: Todo): Result<boolean> {
+export function updateTodo (todo: Todo, specificState: string | null = null): Result<boolean> {
   return actionWrapper(todo, (todo, fileContent) => {
-    const nextState = getNextState(todo);
+    if (!specificState) {
+      specificState = getNextState(todo);
+    }
     const regex = new RegExp(`- \\[${escapeRegex(todo.state)}\\] ${escapeRegex(todo.title)}`, 'g');
-    return fileContent.replace(regex, `- [${nextState}] ${todo.title}`);
+    return fileContent.replace(regex, `- [${specificState}] ${todo.title}`);
   });
 }
 

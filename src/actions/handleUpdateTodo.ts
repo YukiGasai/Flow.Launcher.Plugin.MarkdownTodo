@@ -1,24 +1,23 @@
 import { updateTodo } from '../util/todoHelper.js';
-import { Todo } from '../types.js';
-import { showResult } from '../util/showResult.js';
+import { Icon, Todo } from '../types.js';
+import { refreshResults, showResult } from '../util/showResult.js';
+import { I18n } from '../util/i18n.js';
+
+const i18n = I18n.getInstance();
 
 export function handleUpdateTodo (params: string[]): void {
-  const { query, item } = JSON.parse(params.join(''));
+  const { query, item, state } = JSON.parse(params.join(''));
 
   const todo = new Todo(item.title, item.state, item.folderPath, item.fileName);
 
-  const updateResult = updateTodo(todo);
+  const updateResult = updateTodo(todo, state);
   if (updateResult.error) {
     return showResult({
-      title: 'Error updating todo',
+      title: i18n.t('Error updating todo'),
       subtitle: updateResult.error.message,
-      iconPath: 'icons\\alert.png',
+      iconPath: Icon.ALERT,
     });
   }
 
-  // Trigger a reload of the todos list by updating the query
-  console.log(JSON.stringify({
-    method: 'Flow.Launcher.ChangeQuery',
-    parameters: [`t ${query}`, true]
-  }));
+  refreshResults(query);
 }

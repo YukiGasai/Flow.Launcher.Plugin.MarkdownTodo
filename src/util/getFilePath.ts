@@ -2,6 +2,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { format } from 'date-fns/format';
 import type { Result } from '../types.js';
+import { getDateOffset } from './dateOffsetHelper.js';
+import { I18n } from './i18n.js';
+
+const i18n = I18n.getInstance();
 
 /**
  * Get the date in the form of a pattern string
@@ -32,13 +36,13 @@ function checkForPatterns (input: string, dateOffset = 0): Result<string> {
     stringWithData = input.replace(/\{\{[^}]*\}\}/g, (match) => {
       const newString = replacePattern(today, match);
       if (newString === 'error') {
-        throw new Error(`Invalid Pattern: ${match}`);
+        throw new Error(`${i18n.t('Invalid Pattern')}: ${match}`);
       }
       return newString;
     });
   } catch (error) {
     let message;
-    if (error instanceof Error) message = `Invalid Pattern: ${error.message}`;
+    if (error instanceof Error) message = `${i18n.t('Invalid Pattern')}: ${error.message}`;
     return { data: null, error: new Error(message) };
   }
 
@@ -53,7 +57,7 @@ function checkForPatterns (input: string, dateOffset = 0): Result<string> {
 export function getFilePath (settings: Record<string, string>): Result<[string, string?]> {
   // Make sure the folder path is set in the settings
   if (!settings.folderPath) {
-    return { data: null, error: new Error('Missing setting Folder Path') };
+    return { data: null, error: new Error(i18n.t('Missing setting Folder Path')) };
   }
 
   let folderPath = settings.folderPath;
@@ -69,8 +73,10 @@ export function getFilePath (settings: Record<string, string>): Result<[string, 
     fileName = fileName.slice(1);
   }
 
+  const dateOffset = getDateOffset();
+
   // Check for date patterns in folderpath
-  const folderPathResult = checkForPatterns(folderPath);
+  const folderPathResult = checkForPatterns(folderPath, dateOffset);
   if (folderPathResult.error) {
     return { data: null, error: folderPathResult.error };
   }
@@ -78,7 +84,7 @@ export function getFilePath (settings: Record<string, string>): Result<[string, 
 
   // If there is a filename check for data patterns
   if (fileName) {
-    const fileNameResult = checkForPatterns(fileName);
+    const fileNameResult = checkForPatterns(fileName, dateOffset);
     if (fileNameResult.error) {
       return { data: null, error: fileNameResult.error };
     }
@@ -86,7 +92,7 @@ export function getFilePath (settings: Record<string, string>): Result<[string, 
   }
 
   if (!existsSync(join(folderPath, fileName ?? ''))) {
-    return { data: null, error: new Error(`File doesn't exist ${join(folderPath, fileName ?? '')}`) };
+    return { data: null, error: new Error(`${i18n.t('File doesn\'t exist')} ${join(folderPath, fileName ?? '')}`) };
   }
 
   return { data: [folderPath, fileName], error: null };

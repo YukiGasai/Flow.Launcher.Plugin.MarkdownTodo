@@ -56,6 +56,9 @@ It is possible to add a new todo by typing `t +` and then the title of the todo.
 
 It is possible to delete a todo by typing `t -`.
 
+You can set a date offset to switch between days by typing `t >` or `t <`.
+It is possible to move multiple days by typing `t >2` or `t <2`.
+
 ## Thanks to
 
 - [EmojiFinder plugin](https://github.com/kalvn/Flow.Launcher.Plugin.EmojiFinder) for providing a good example on how to create a FlowLauncher plugin.

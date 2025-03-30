@@ -4,7 +4,7 @@
   "Name": "MarkdownTodo",
   "Description": "Update your markdown todo list with Flow Launcher",
   "Author": "YukiGasai",
-  "Version": "0.0.1",
+  "Version": "0.0.2",
   "Language": "javascript",
   "Website": "https://github.com/YukiGasai/Flow.Launcher.Plugin.MarkdownTodo",
   "ExecuteFileName": "dist\\main.js",

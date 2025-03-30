@@ -1,0 +1,17 @@
+{
+    "Error inserting todo": "Error inserting todo",
+    "Error deleting todo": "Error deleting todo",
+    "Today": "Today",
+    "Subtract": "Subtract",
+    "Add": "Add",
+    "day(s) to": "day(s) to",
+    "Error": "Error",
+    "Add Todos only works when setting a file name in the settings": "Add Todos only works when setting a file name in the settings",
+    "Add New Todo": "Add New Todo",
+    "Error loading Todos": "Error loading Todos",
+    "Error updating todo": "Error updating todo",
+    "Error reading settings file": "Error reading settings file",
+    "Invalid Pattern": "Invalid Pattern",
+    "Missing setting Folder Path": "Missing setting Folder Path",
+    "File doesn't exist": "File doesn't exist"
+}

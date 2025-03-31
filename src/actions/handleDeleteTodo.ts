@@ -1,4 +1,4 @@
-import { Icon, Todo } from '../types.js';
+import { Icon, Methods, Todo } from '../types.js';
 import { I18n } from '../util/i18n.js';
 import { refreshResults, showResult } from '../util/showResult.js';
 import { delteTodo } from '../util/todoHelper.js';
@@ -14,6 +14,7 @@ export function handleDeleteTodo (params: string[]): void {
     return showResult({
       title: i18n.t('Error deleting todo'),
       subtitle: delteResult.error.message,
+      method: Methods.OPEN_SETTINGS,
       iconPath: Icon.ALERT,
     });
   }

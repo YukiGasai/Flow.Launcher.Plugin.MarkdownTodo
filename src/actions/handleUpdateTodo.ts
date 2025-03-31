@@ -1,5 +1,5 @@
 import { updateTodo } from '../util/todoHelper.js';
-import { Icon, Todo } from '../types.js';
+import { Icon, Methods, Todo } from '../types.js';
 import { refreshResults, showResult } from '../util/showResult.js';
 import { I18n } from '../util/i18n.js';
 
@@ -15,6 +15,7 @@ export function handleUpdateTodo (params: string[]): void {
     return showResult({
       title: i18n.t('Error updating todo'),
       subtitle: updateResult.error.message,
+      method: Methods.OPEN_SETTINGS,
       iconPath: Icon.ALERT,
     });
   }

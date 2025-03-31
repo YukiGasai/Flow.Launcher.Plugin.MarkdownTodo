@@ -134,6 +134,7 @@ export enum QuerySpecialActions {
 }
 
 export enum Methods {
+  OPEN_SETTINGS = 'Flow.Launcher.OpenSettingDialog',
   CHANGE_QUERY = 'Flow.Launcher.ChangeQuery',
   CONTEXT_MENU = 'context_menu',
   CHANGE_DATE_OFFSET = 'change_date_offset',

@@ -62,6 +62,8 @@ async function handleUpdateDateOffset (settings: Record<string, string>, isSubtr
     subtitle: `${isSubtraction ? i18n.t('Subtract') : i18n.t('Add')} ${offsetChange} ${i18n.t('day(s) to')} ${newDate}`,
     iconPath: isSubtraction ? Icon.LEFT : Icon.RIGHT,
     method: Methods.CHANGE_DATE_OFFSET,
+    // Dumb way to make sure the order of the results is always the same as in the markdown file
+    score: 1000000,
     dontHideAfterAction: true,
     params: [JSON.stringify({
       offsetChangeAmount: newOffset
@@ -99,6 +101,7 @@ function handleAddTodo (settings: Record<string, string>, query: string): void {
     return showResult({
       title: i18n.t('Error'),
       subtitle: i18n.t('Add Todos only works when setting a file name in the settings'),
+      method: Methods.OPEN_SETTINGS,
       iconPath: Icon.ALERT,
     });
   }
@@ -109,6 +112,7 @@ function handleAddTodo (settings: Record<string, string>, query: string): void {
     return showResult({
       title: i18n.t('Error'),
       subtitle: folderPathResult.error.message,
+      method: Methods.OPEN_SETTINGS,
       iconPath: Icon.ALERT,
     });
   }
@@ -144,6 +148,7 @@ async function handleUpdateTodo (settings: Record<string, string>, query: string
       showResult({
         title: i18n.t('Error loading Todos'),
         subtitle: todoResult.error.message,
+        method: Methods.OPEN_SETTINGS,
         iconPath: Icon.ALERT,
       });
     }
@@ -153,14 +158,16 @@ async function handleUpdateTodo (settings: Record<string, string>, query: string
   // Filter the todos and convert them to list items
   const todos = todoResult.data;
   const filteredTodos = filterTodos(todos, query);
-  const result: JSONRPCResponse[] = filteredTodos.map(todo => ({
+  const result: JSONRPCResponse[] = filteredTodos.map((todo, index) => ({
     title: todo.title,
     subtitle: todo.fileName,
     iconPath: isDelete ? Icon.TRASH : iconMap.get(todo.state) || Icon.INFO,
     method: isDelete ? Methods.DELETE_TODO : Methods.UPDATE_TODO,
     dontHideAfterAction: true,
     contextData: [JSON.stringify({ query, item: todo })],
-    params: [JSON.stringify({ query, item: todo })]
+    params: [JSON.stringify({ query, item: todo })],
+    // Dumb way to make sure the order of the results is always the same as in the markdown file
+    score: 100000 - (index * 1000),
   }));
 
   if (noDisplay) {

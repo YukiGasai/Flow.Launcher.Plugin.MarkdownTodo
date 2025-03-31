@@ -1,5 +1,5 @@
 import { insertTodo } from '../util/todoHelper.js';
-import { Icon, Todo } from '../types.js';
+import { Icon, Methods, Todo } from '../types.js';
 import { refreshResults, showResult } from '../util/showResult.js';
 import { I18n } from '../util/i18n.js';
 
@@ -13,6 +13,7 @@ export function handleAddTodo (params: string[]): void {
     return showResult({
       title: i18n.t('Error inserting todo'),
       subtitle: insertResult.error.message,
+      method: Methods.OPEN_SETTINGS,
       iconPath: Icon.ALERT,
     });
   }
